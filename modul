@@ -1,0 +1,36 @@
+class Store {
+    private static Store instance;
+
+    private Store() {
+        // Ініціалізація магазину
+    }
+
+    public static Store getInstance() {
+        if (instance == null) {
+            synchronized (Store.class) {
+                if (instance == null) {
+                    instance = new Store();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public void sellProduct(String productName) {
+        // Логіка продажу товару
+        System.out.println("Продано товар: " + productName);
+    }
+    
+    // Інші методи магазину
+}
+
+class Application {
+    public static void main(String[] args) {
+        Store foo = Store.getInstance();
+        foo.sellProduct("Product A");
+        // ...
+        Store bar = Store.getInstance();
+        bar.sellProduct("Product B");
+        // Обидва об'єкти "foo" та "bar" вказують на один і той же магазин
+    }
+}
